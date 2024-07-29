@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<style>
+div {
+	background-color: #EFEEE5;
+}
+</style>
+  <head>
+    <title>Luan Matheus Schmidt - Cloudflare Take Home Test</title>
+  </head>
+  <body>
+    <p><h1>1.</h1>
+	Hello, thank you so much for contacting us about this matter. I verified here and the nameservers are already configured and the DNS resolution has also been completed, since it’s a process that will need time to occur, because the records on the servers are cached with a time to be reset. I’m also able to reach your website without any problem in different networks, and even though proxies. In this case, I recommend you to perform a cache cleaning on the networks you are using to attempt to reach the website, that you can do following the steps I’m providing <a href="https://developers.cloudflare.com/dns/troubleshooting/faq/#why-are-dns-queries-returning-incorrect-results">HERE</a>. And, in case you’d like to know a little more about how DNS works, I also have a great article with information <a href="https://www.cloudflare.com/en-gb/learning/dns/what-is-dns/">HERE</a>. Don’t hesitate in reaching back if you need further clarification. 
+	
+	<h1>2.</h1>
+	Hi, I appreciate your contact! In fact, the IP you see in the nameservers your website is using are indicating that the servers are located in California. However, Cloudflare is providing you CDN (content delivery network) resources, meaning that for anyone trying to reach your website, the website will always be displayed from the closest possible location based on a cached version stored while the entirety of the website is reached in the background, based on the end user data, to improve the delivery of your website around the world. If you have interest in more details about CDN and how it works, I brought you an article that will be useful <a href="https://www.cloudflare.com/en-gb/learning/cdn/what-is-a-cdn/">HERE</a>. Please let me know if you need any other help. 
+	
+	<h1>3.</h1>
+	Hello! In this situation, it’s possible that you did not deploy the code used on Workers to your website, and although it can be tested on the debugger, on production your website doesn’t use it yet. Deploying the Worker you developed will be simple, you will just need to go to your Cloudflare Dashboard, then Workers & Pages, select the desired Worker and click on Deploy. You can even use your Worker in more sophisticated configurations, as you can see in our documentation for Workers <a href="https://developers.cloudflare.com/workers/">HERE</a>. If you have other doubts regarding our products and services, please let me know. 
+	
+	<h1>4.</h1>
+	Greetings, and I’ll be glad to clear this doubt for you. There is a key difference between many DNS services and the one that Cloudflare provides. Different DNS recursive resolvers such as Google DNS, OpenDNS, and providers like Comcast all maintain data center installations of DNS recursive resolvers. These resolvers allow for quick and easy queries through optimized clusters of DNS-optimized computer systems, but they are fundamentally different than the nameservers hosted by Cloudflare. 
+	Cloudflare maintains infrastructure-level nameservers that are integral to the functioning of the Internet. One key example is the f-root server network which Cloudflare is partially responsible for hosting. The F-root is one of the root level DNS nameserver infrastructure components responsible for the billions of Internet requests per day. Our Anycast network puts us in a unique position to handle large volumes of DNS traffic without service interruption. 
+	It is possible for your website to use Cloudflare nameservers and also keep using the resources provided by your actual host, however any changes made on the DNS may take time to occur, therefore I recommend you to execute it in a period of time when your website has the least number of accesses. You can do the DNS changes by following documentation I’m providing <a href="https://developers.cloudflare.com/dns/zone-setups/full-setup/setup/">HERE</a>. In case you need further details or help, let us know. 
+	<h1>5.</h1>
+	Hi! By default, Cloudflare does not cache the resource when the Cache-Control header is set to private, no-store, no-cache, or max-age=0, and at least two of those are currently configured on your website. There is no need to worry, you can adjust this to see it working as expected. I also brought for you some documentation with more details about Cloudflare’s default caching behavior, and other cache rules that you can configure to optimize your website even more <a href="https://developers.cloudflare.com/cache/#cloudflare-cache">HERE</a>. Best regards, and let me know in case you need. 
+	<h1>6.</h1>
+	Hello and thank you for your contact. You should be able to create a redirect through your Cloudflare dashboard or API, following this article <a href="https://developers.cloudflare.com/rules/transform/url-rewrite/create-dashboard/">HERE</a>. The specific parameter you are looking for is http.user_agent, and you can check all the available fields and functions <a href="https://developers.cloudflare.com/rules/transform/url-rewrite/reference/fields-functions/">HERE</a> as well. Another option of redirection will be using Cloudflare Workers, and creating a Worker similar to this, customizing with the responses you prefer: 
+	<div><p>export default { </p>
+	<p>fetch (request) {</p>
+    <p>// Redirect clients using IE8</p>
+    <p>const userAgent = request.headers.get('User-Agent') || ''</p>
+	
+	<p>if (userAgent.includes('MSIE 8')) {</p>
+	<p>return Response.redirect('https://please-do-not-use-ie8.com')</p>
+    <p>}</p>
+	
+	<p>// Default behavior</p>
+	<p>return new Response(`Hey and welcome! Your user agent is ${userAgent}`)</p>
+	<p>}</p></div>
+
+Regarding this alternative, it is a conditional response available on Workers, and you can have more details about it <a href="https://developers.cloudflare.com/workers/examples/conditional-response/">HERE</a>. Let me know in case I can be of assist with something else. </p>
+  </body>
+</html>
